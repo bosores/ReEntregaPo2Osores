@@ -1,4 +1,4 @@
-package testUsuario;
+package publicacion;
 
 public interface FormaDePago {
 

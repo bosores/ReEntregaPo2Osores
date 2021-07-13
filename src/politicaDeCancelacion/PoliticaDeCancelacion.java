@@ -1,6 +1,6 @@
 package politicaDeCancelacion;
 
-import testUsuario.Reserva;
+import Reserva.Reserva;
 
 public interface PoliticaDeCancelacion {
 

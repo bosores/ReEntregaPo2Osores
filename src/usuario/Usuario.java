@@ -1,7 +1,11 @@
-package testUsuario;
+package usuario;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import Reserva.Puntaje;
+import Reserva.Reserva;
+import publicacion.FormaDePago;
 import publicacion.Publicacion;
 
 public class Usuario {
@@ -11,6 +15,7 @@ public class Usuario {
 	private int telefono;
 	private SitioWeb sitio;
 	private double deudaPendiente;
+	private List<Puntaje> puntajes;
 
 	public void setEmail(String email) {
 		this.eMail = email;		
@@ -66,6 +71,15 @@ public class Usuario {
 
 	public void incorporarDeuda(double deuda) {
 		 this.deudaPendiente = this.deudaPendiente +  deuda;
+	}
+
+	public void recibirPuntaje(Puntaje puntaje ) {
+		this.getPuntajes().add(puntaje);
+	}
+
+	
+	public List<Puntaje> getPuntajes() {
+		return this.puntajes;
 	}
 
 	

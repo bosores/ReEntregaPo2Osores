@@ -12,7 +12,11 @@ import org.junit.jupiter.api.Test;
 
 import politicaDeCancelacion.PoliticaDeCancelacion;
 import politicaDeCancelacion.PoliticaDeCancelacionGratuita;
+import publicacion.Efectivo;
+import publicacion.FormaDePago;
 import publicacion.Publicacion;
+import usuario.SitioWeb;
+import usuario.Usuario;
 
 class UsuarioTestCase {
 
