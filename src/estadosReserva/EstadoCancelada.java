@@ -1,19 +1,16 @@
 package estadosReserva;
 
+import Reserva.CategoriaDePuntaje;
 import Reserva.Puntaje;
+import Reserva.Reserva;
+import politicaDeCancelacion.PoliticaDeCancelacion;
+import publicacion.Publicacion;
 
 public class EstadoCancelada extends Estado{
-
+	
 	@Override
-	public void puntuar(Puntaje puntaje) {
-		// TODO Auto-generated method stub
-		
+	public void cancelar( Reserva reserva) {
+		reserva.getPublicacion().cancelar(reserva);
 	}
-
-	@Override
-	public boolean puedePuntuar(Puntaje puntaje) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }

@@ -1,8 +1,9 @@
-package usuario;
+package Sitio;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import Reserva.CategoriaDePuntaje;
 import Reserva.Puntaje;
 import Reserva.Reserva;
 import publicacion.FormaDePago;
@@ -16,6 +17,7 @@ public class Usuario {
 	private SitioWeb sitio;
 	private double deudaPendiente;
 	private List<Puntaje> puntajes;
+	private ServicioMail servicioMail;
 
 	public void setEmail(String email) {
 		this.eMail = email;		
@@ -80,6 +82,36 @@ public class Usuario {
 	
 	public List<Puntaje> getPuntajes() {
 		return this.puntajes;
+	}
+
+	public void confirmarAlquiler(Reserva reserva) {
+		this.getSitio().generarOcupacionDeReserva(reserva);
+		
+	}
+
+
+	public void registrarPuntajeDe(Usuario usuarioInteresado, Integer puntos, CategoriaDePuntaje categoria) {
+		Puntaje puntajeRecibido =  new Puntaje(usuarioInteresado, puntos, categoria);
+		this.getPuntajes().add(puntajeRecibido);
+		
+	}
+
+	public void enviarMailDeConfirmacionPara(Usuario usuarioInteresado) {
+		this.getServicioMail().mailDeConfirmacionPara(usuarioInteresado);
+	}
+
+	private ServicioMail getServicioMail() {
+		return (this.servicioMail);
+	}
+
+	public void rechazarReserva(Reserva reserva) {
+			reserva.fueRechazada(reserva);
+		
+	}
+
+	public void enviarMailDeCancelacionPara(Usuario usuarioInteresado) {
+		this.getServicioMail().mailDeCancelacionPara(usuarioInteresado);
+
 	}
 
 	

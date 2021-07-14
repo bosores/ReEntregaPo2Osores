@@ -10,9 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Reserva.Reserva;
+import Sitio.Usuario;
 import politicaDeCancelacion.PoliticaDeCancelacion;
 import politicaDeCancelacion.PoliticaDeCancelacionGratuita;
-import usuario.Usuario;
 
 class PublicacionTestCase {
 /**

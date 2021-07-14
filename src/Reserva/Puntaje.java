@@ -1,6 +1,6 @@
 package Reserva;
 
-import usuario.Usuario;
+import Sitio.Usuario;
 
 public class Puntaje {
 

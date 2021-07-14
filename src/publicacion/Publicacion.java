@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.function.BooleanSupplier;
 
 import Reserva.Reserva;
+import Sitio.Usuario;
 import politicaDeCancelacion.PoliticaDeCancelacion;
-import usuario.Usuario;
 
 public class Publicacion {
 
@@ -102,7 +102,7 @@ public class Publicacion {
 	}
 
 	public void cancelar(Reserva reserva) {
-		//this.cobrarConCancelacion(reserva);
+		this.cobrarConCancelacion(reserva);
 		this.getReservasEncoladas().remove(reserva);	
 	}
 

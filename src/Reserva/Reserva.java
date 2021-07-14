@@ -2,11 +2,12 @@ package Reserva;
 
 import java.time.LocalDate;
 
+import Sitio.Usuario;
 import estadosReserva.Estado;
 import estadosReserva.EstadoEsperandoAprobacion;
 import publicacion.FormaDePago;
+import publicacion.Inmueble;
 import publicacion.Publicacion;
-import usuario.Usuario;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -83,16 +84,38 @@ public class Reserva {
 		return ( diferencia >dias  );
 	}
 	
-	
-	
+
 	public void puntuarPropietario(int valor, CategoriaDePuntaje category) {
 		
-		Puntaje puntaje = new Puntaje( this.propietarioDePublicacion(), valor, category);
-		this.getEstado().puntuar(puntaje);	
+		this.getEstado().puntuarPropietario(this, valor, category);	
+	}
+	
+	public void puntuarInmueble(int valor, CategoriaDePuntaje category) {
+		
+		this.getEstado().puntuarInmueble(this, valor, category);	
 	}
 
-	private Usuario propietarioDePublicacion() {
+	public void consolidarEnElSitio() {
+		this.getEstado().consolidarEnElSitio( this);
+	}
+	
+	
+	public Usuario propietarioDePublicacion() {
 		return this.getPublicacion().getPropietario();
+	}
+	
+	
+	public Inmueble getInmuebleDePublicacion() {
+				return (this.getPublicacion().getInmueble());
+	}
+	public void dispararMailConfirmacionPara(Usuario usuarioInteresado) {
+		this.propietarioDePublicacion().enviarMailDeConfirmacionPara(usuarioInteresado);
+	}
+	public void darseDeBaja() {
+		this.getEstado().cancelar(this);
+	}
+	public void fueRechazada(Reserva reserva) {
+		this.getEstado().rechazada(reserva);
 	}
 
 	

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Reserva.Reserva;
-import usuario.*;
+import Sitio.*;
 
 class PoliticaDeCancelacionTestCase {
 	/**

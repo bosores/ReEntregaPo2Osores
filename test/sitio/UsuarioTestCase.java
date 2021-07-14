@@ -1,4 +1,4 @@
-package testUsuario;
+package sitio;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Sitio.SitioWeb;
+import Sitio.Usuario;
 import politicaDeCancelacion.PoliticaDeCancelacion;
 import politicaDeCancelacion.PoliticaDeCancelacionGratuita;
 import publicacion.Efectivo;
 import publicacion.FormaDePago;
 import publicacion.Publicacion;
-import usuario.SitioWeb;
-import usuario.Usuario;
 
 class UsuarioTestCase {
 
