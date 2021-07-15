@@ -71,6 +71,9 @@ class PublicacionTestCase {
 	void testPublicacionCancelaReservaEncolada() {
 	
 		Reserva reserva = mock(Reserva.class);
+		PoliticaDeCancelacion gratis = mock(PoliticaDeCancelacionGratuita.class);
+		
+		publicacion.setPoliticaDeCancelacion(gratis);
 		
 		publicacion.encolarReserva(reserva);
 		publicacion.cancelar(reserva);

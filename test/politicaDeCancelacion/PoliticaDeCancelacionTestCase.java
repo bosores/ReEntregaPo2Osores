@@ -42,12 +42,12 @@ class PoliticaDeCancelacionTestCase {
 	}
 	
 	@Test
-	void testCostoPoliticaDeCancelacionGratuitaParaPubli() {
+	void testCostoPoliticaDeCancelacionGratuitaParaPubli() { 
 		when(reserva.getPrecioDePublicacionPorDia()).thenReturn(1.0);
 		when(reserva.getUsuarioInteresado()).thenReturn(usuario);
 		when(reserva.fueCreadaConDiasDeAnterioridad(10)).thenReturn(true);
 		gratuita.cobrar(reserva);
-		assertEquals( 2,0 , usuario.getDeudaPendiente()  );
+		assertEquals( 0,0 , usuario.getDeudaPendiente()  ); //una reserva gratuita no cobra deudas al usuario
 		
 	}
 

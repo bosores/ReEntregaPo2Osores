@@ -30,6 +30,9 @@ public class Reserva {
 		this.setEstado( new EstadoEsperandoAprobacion() ); //cuando la reserva es generada está esperando aprobacion
 	
 	}
+	public Reserva() {
+		this.setEstado(new EstadoEsperandoAprobacion());
+	}
 	/**GETTERS AND STTERS**/
 	
 
@@ -49,19 +52,19 @@ public class Reserva {
 		return checkOut;
 	}
 
-	private void setCheckOut(LocalDate checkOut) {
+	public void setCheckOut(LocalDate checkOut) {
 		this.checkOut =checkOut;
 	}
-	private void setCheckIn(LocalDate checkIn) {
+	public void setCheckIn(LocalDate checkIn) {
 		this.checkIn = checkIn;
 	}
-	private void setFormaDePago(FormaDePago forma) {
+	public void setFormaDePago(FormaDePago forma) {
 		this.formaDePago = forma;
 	}
-	private void setPublicacion(Publicacion publi) {
+	public void setPublicacion(Publicacion publi) {
 		this.publicacion =publi;
 	}
-	private void setUsuarioInteresado(Usuario usuarioInteresado) {
+	public void setUsuarioInteresado(Usuario usuarioInteresado) {
 		this.usuarioInteresado = usuarioInteresado;
 	}
 	public void  setEstado(Estado estado) {
@@ -75,22 +78,35 @@ public class Reserva {
         long dias = DAYS.between(checkIn, checkOut);
 		return(dias);
 	}
-	public Estado getEstado() {
+	
+public Estado getEstado() {
 		return (this.estado) ;
 	}	
 	
+	public Usuario propietarioDePublicacion() {
+		return this.getPublicacion().getPropietario();
+	}
+	
+	
 	public boolean fueCreadaConDiasDeAnterioridad(int dias) {
         long diferencia = DAYS.between(checkIn, getPublicacion().getCheckIn());
-		return ( diferencia >dias  );
+		return ( diferencia >=dias  );
 	}
 	
+	
+	public Inmueble getInmuebleDePublicacion() {
+				return (this.getPublicacion().getInmueble());
+	}
+	public void dispararMailConfirmacion(Usuario usuarioInteresado) {
+		this.propietarioDePublicacion().enviarMailDeConfirmacionPara(usuarioInteresado);
+	}
 
-	public void puntuarPropietario(int valor, CategoriaDePuntaje category) {
+	public void puntuarPropietario(int valor, CategoriaDePuntaje category) throws Exception {
 		
-		this.getEstado().puntuarPropietario(this, valor, category);	
+		this.getEstado().puntuarUsuario(this, valor, category);	
 	}
 	
-	public void puntuarInmueble(int valor, CategoriaDePuntaje category) {
+	public void puntuarInmueble(int valor, CategoriaDePuntaje category) throws Exception {
 		
 		this.getEstado().puntuarInmueble(this, valor, category);	
 	}
@@ -100,22 +116,16 @@ public class Reserva {
 	}
 	
 	
-	public Usuario propietarioDePublicacion() {
-		return this.getPublicacion().getPropietario();
-	}
-	
-	
-	public Inmueble getInmuebleDePublicacion() {
-				return (this.getPublicacion().getInmueble());
-	}
-	public void dispararMailConfirmacionPara(Usuario usuarioInteresado) {
-		this.propietarioDePublicacion().enviarMailDeConfirmacionPara(usuarioInteresado);
-	}
 	public void darseDeBaja() {
 		this.getEstado().cancelar(this);
+		this.establecerBajaDelSitio();
 	}
-	public void fueRechazada(Reserva reserva) {
-		this.getEstado().rechazada(reserva);
+	public void establecerBajaDelSitio() {
+			this.propietarioDePublicacion().getSitio().cancelarReserva(this);
+		
+	}
+	public void fueRechazada() {
+		this.getEstado().rechazada(this);
 	}
 
 	

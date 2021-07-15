@@ -1,6 +1,7 @@
 package Sitio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import Reserva.CategoriaDePuntaje;
@@ -16,8 +17,9 @@ public class Usuario {
 	private int telefono;
 	private SitioWeb sitio;
 	private double deudaPendiente;
-	private List<Puntaje> puntajes;
-	private ServicioMail servicioMail;
+	private List<Puntaje> puntajes = new ArrayList<Puntaje>();
+	private ServicioMail servicioMail = new ServicioMail();
+	private int mailsRecibidos;
 
 	public void setEmail(String email) {
 		this.eMail = email;		
@@ -68,7 +70,7 @@ public class Usuario {
 	}
 
 	public void cancelar(Reserva reserva) {
-		this.getSitio().cancelarReserva(reserva);
+		reserva.getPublicacion().cancelar(reserva);
 	}
 
 	public void incorporarDeuda(double deuda) {
@@ -100,13 +102,15 @@ public class Usuario {
 		this.getServicioMail().mailDeConfirmacionPara(usuarioInteresado);
 	}
 
+	public int getMailsDeConfirmacionRecibidos() {
+		return(this.mailsRecibidos);
+	}
 	private ServicioMail getServicioMail() {
 		return (this.servicioMail);
 	}
 
 	public void rechazarReserva(Reserva reserva) {
-			reserva.fueRechazada(reserva);
-		
+			reserva.fueRechazada();
 	}
 
 	public void enviarMailDeCancelacionPara(Usuario usuarioInteresado) {
@@ -114,8 +118,23 @@ public class Usuario {
 
 	}
 
+	public void setMailsRecibidos(int mailsRecibidos) {
+		this.mailsRecibidos = mailsRecibidos;
+	}
+
+	public void puntuarInmueble(Reserva reserva, Integer valor, CategoriaDePuntaje category) throws Exception {
+		reserva.puntuarInmueble(valor, category);
+	}
 	
-	
+	public void puntuarPropietario(Reserva reserva, Integer valor, CategoriaDePuntaje category) throws Exception {
+		reserva.puntuarPropietario(valor, category);
+	}
+
+	public Usuario() {
+		super();
+		this.puntajes = new ArrayList<Puntaje>();
+		this.servicioMail = new ServicioMail();
+	}
 	
 	
 	

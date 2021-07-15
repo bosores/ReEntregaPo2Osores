@@ -19,13 +19,13 @@ public class EstadoConcretada extends Estado {
 			this.getInmueble(reserva).registrarPuntajeDe(reserva.getUsuarioInteresado(),puntos, categoria);
 		  }
 	@Override
-		public void puntuarPropietario(Reserva reserva, Integer puntos, CategoriaDePuntaje categoria) {
+		public void puntuarUsuario(Reserva reserva, Integer puntos, CategoriaDePuntaje categoria) {
 			this.getPropietario(reserva).registrarPuntajeDe(reserva.getUsuarioInteresado(),puntos, categoria);
 	     }
 	@Override
 	public void consolidarEnElSitio(Reserva reserva) {
 		reserva.propietarioDePublicacion().confirmarAlquiler(reserva);
-		reserva.dispararMailConfirmacionPara(reserva.getUsuarioInteresado());
+		reserva.dispararMailConfirmacion(reserva.getUsuarioInteresado());
 	    }
 	
 	@Override
@@ -36,5 +36,11 @@ public class EstadoConcretada extends Estado {
 		
 	}
 
+	@Override 
+	public boolean estaConcretado() {
+			
+			return true;
+		}
+	
 	
 }

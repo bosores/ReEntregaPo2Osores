@@ -33,7 +33,11 @@ public class Publicacion {
 		this.setCheckOut(checkOut);
 		this.setPrecioPorDia(precio);
 		this.setPoliticaDeCancelacion(politica);
+		this.setReservasEncoladas(new ArrayList<Reserva>()  );
 	
+	}
+	public Publicacion() {
+		// TODO Auto-generated constructor stub
 	}
 	public List<Comentario> getComentarios() {
 		return comentarios;
@@ -102,16 +106,21 @@ public class Publicacion {
 	}
 
 	public void cancelar(Reserva reserva) {
-		this.cobrarConCancelacion(reserva);
+		//this.cobrarConCancelacion(reserva);
 		this.getReservasEncoladas().remove(reserva);	
 	}
 
-	private void cobrarConCancelacion(Reserva reserva) {
+	private void cobrar(Reserva reserva) {
 			this.getPoliticaDeCancelacion().cobrar(reserva);
 			
 	}
 	public boolean aceptaFormaDePago(FormaDePago formaDePago) {
 		return (this.getFormasDePago().contains(formaDePago) ) ;
+	}
+	public boolean registra(Reserva reserva) {
+		
+		return(this.getReservasEncoladas().contains(reserva) );
+
 	}
 
 

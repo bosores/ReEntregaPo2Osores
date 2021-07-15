@@ -13,11 +13,12 @@ public abstract class Estado {
 	 * lo que tengo en cuenta es que  ningun estado podrá implementar los mensajes. 
 	 * luego cada uno reescribirá sólo el mensaje que le interesa 
 	 * para realizar la accion correspondiente dependiendo de las reglas de negocio 
+	 * @throws Exception 
 	 */
-	public void puntuarInmueble(Reserva reserva, Integer puntos, CategoriaDePuntaje categoria) {
+	public void puntuarInmueble(Reserva reserva, Integer puntos, CategoriaDePuntaje categoria) throws Exception {
 		this.errorDePuntuacion();
 	}
-	public void puntuarPropietario(Reserva reserva, Integer puntos, CategoriaDePuntaje categoria) {
+	public void puntuarUsuario(Reserva reserva, Integer puntos, CategoriaDePuntaje categoria) throws Exception {
 		this.errorDePuntuacion();
 	}
 	public void consolidarEnElSitio(Reserva reserva) {
@@ -38,20 +39,36 @@ public abstract class Estado {
 	}
 	
 	private void errorDeCancelacion() {
-		System.out.println("no se puede cancelar la reserva en este momento");
+		
+		 new Exception("no se puede cancelar la reserva en este momento");
 	}
-	private void errorDePuntuacion() {
-		System.out.println("no se puede puntuar en este momento");
+	private void errorDePuntuacion()throws Exception { 
+		new Exception("no se puede puntuar en este momento");
+
 	}
 	private void errorDeConsolidacion() {
-		System.out.println("no se puede consolidar la reserva en este momento");
+		 new Exception("no se puede consolidar la reserva en este momento");
+
 	}
 	public void rechazada(Reserva reserva) {
 		this.getPropietario(reserva).enviarMailDeCancelacionPara(reserva.getUsuarioInteresado());
+		reserva.setEstado(new EstadoCancelada());
+		reserva.getEstado().cancelar(reserva);
 	}
 	
+	/** @author bian estos mensajes solo son para finalidades de testeo **/
 	
+	public boolean estaCancelado() {
+		return(false);
+	}
 	
+	public boolean estaConcretado() {
+		return(false);
+	}
+	
+	public boolean estaEsperandoAprobacion() {
+		return(false);
+	}
 	
 }
 
